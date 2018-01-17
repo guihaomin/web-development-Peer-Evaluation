@@ -1,0 +1,35 @@
+<% provide(:title, 'Manage Groups') %>
+<h1>Manage Groups</h1>
+<% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
+<h3><%= link_to "Create New Group", creategroup_path %></h3>
+
+<% @a.each do |t| %>
+    <h2><%= t.first.group_type %></h2>
+    <table class="table table-striped">
+      <tr>
+        <th>Group Name</th>
+        <th>Add a Student by Login ID</th>
+        <th colspan="1"></th>
+      </tr>
+      <% t.to_a.each do |item| %>
+          <tr>
+            <td><%= item.name %></td>
+            <td>
+              <%= form_tag '/addstudent' do %>
+                  <%= text_field_tag :userID %>
+                  <%= hidden_field_tag :name, item.name %>
+                  <%= submit_tag "Add", class: "table_button" %>
+              <% end %>
+            </td>
+            <td>
+              <%= form_tag '/delgroup' do %>
+                  <%= hidden_field_tag :id, item.id %>
+                  <%= submit_tag "Delete Group", class: "table_button" %>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>

@@ -1,0 +1,27 @@
+<% provide(:title, 'Manage Projects') %>
+<h1>Manage Projects</h1>
+<% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
+
+<h3><%= link_to "Create New Project", createproject_path %></h3>
+<% @a.each do |t| %>
+    <h2><%= t.first.project_type %></h2>
+    <table class="table table-striped">
+      <tr>
+        <th>Project Name</th>
+        <th colspan="1"></th>
+      </tr>
+      <% t.to_a.each do |item| %>
+          <tr>
+            <td><%= item.name %></td>
+            <td><%= form_tag '/delproject' do %>
+                  <%= hidden_field_tag :id, item.id %>
+                  <%= submit_tag "Delete project", class: "table_button" %>
+              <% end %></td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>
+
+

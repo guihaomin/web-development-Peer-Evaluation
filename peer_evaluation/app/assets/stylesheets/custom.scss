@@ -1,0 +1,161 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+form {
+  margin: auto;
+  width: 300px;
+}
+
+label {
+  float: left;
+}
+
+.alert {
+  width: 300px;
+  text-align: center;
+  margin: 20px auto;
+}
+
+.form_item input, select {
+  float: right;
+  width: 200px;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: #777;
+}
+
+a:hover {
+  color: #fec503;
+  text-decoration: none;
+}
+
+th, td {
+  text-align: center;
+}
+
+table input {
+  border: 0.5px solid;
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+table input.table_button {
+  color: #fff;
+  background-color: #fed136;
+  border-color: #fed136;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 1px 10px;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+form#eval {
+  width: 500px;
+}
+
+#eval {
+  text-align: center;
+  float: none;
+}
+
+p#score {
+  width: 500px;
+  margin: auto;
+}
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer {
+  margin: 45px;
+  padding: 10px 30px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+}
+
+footer p {
+  float: left;
+}
+
+footer nav {
+  float: right;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  font-size: 1.1em;
+  line-height: 1.7em;
+  float: left;
+  margin-left: 15px;
+}
+
+footer nav ul li a {
+  color: #777;
+  text-decoration: none;
+  &:hover {
+    color: #fec503;
+    text-decoration: none;
+  }
+}
+
+#accordion a {
+  text-decoration: none;
+}

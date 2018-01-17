@@ -1,0 +1,33 @@
+<% provide(:title, 'Create Group') %>
+<h1>Create Group</h1>
+<% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_tag '/newgroup' do |f| %>
+        <div class="form_item">
+          <%= label_tag :name, "Group Name" %>
+          <%= text_field_tag :name %><br/><br/>
+
+          <% all_type=[] %>
+          <% Group.all.to_a.each do |g| %>
+              <% if !all_type.include? [g.group_type] %>
+                  <% all_type.push([g.group_type]) %>
+              <% end %>
+          <% end %>
+          <%= label_tag :type, "Group Type" %>
+          <input name = "type" type="text" list="types" autocomplete="off"/>
+          <datalist id="types">
+            <% all_type.each do |type| %>
+                <option value="<%= type[0] %>"></option>
+            <% end %>
+          </datalist><br/><br/>
+
+
+        </div>
+
+        <%= submit_tag "Create New Group", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

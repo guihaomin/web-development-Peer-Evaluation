@@ -1,0 +1,12 @@
+<h1>Settings</h1>
+<a class="btn btn-primary" href="/changegroup" role="button">Join a Group</a><br>
+Current Groups:<ul>
+<% UserAndGroup.where(userID:@user.id).to_a.each do|item| %>
+      <li>
+    <%= Group.find(item.groupID).name+" (Type: "+Group.find(item.groupID).group_type+ ")" %>
+      </li>
+<% end %>
+</ul>
+<hr>
+<%= "Do you wish to "%>
+<%= link_to "drop the class?", @user, method: :delete, data: { confirm: "Are you sure you wish to drop this class?" } %>

@@ -1,0 +1,25 @@
+<% provide(:title, 'Users') %>
+<h1>Users List</h1>
+<% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
+<p>
+<table class="table table-striped">
+  <tr>
+    <th>User Name</th>
+    <th>Login ID</th>
+    <th colspan="1"></th>
+  </tr>
+  <% @users.to_a.each do |item| %>
+    <tr>
+      <td><%= item.name %></td>
+      <td><%= item.loginID %></td>
+      <%if(item.user_type != "instructor")%>
+        <td><%= link_to "Remove User", item, method: :delete, data: { confirm: "Are you sure you wish to remove this user?" } %></td>
+      <%else%>
+          <td></td>
+      <%end%>
+    </tr>
+  <% end %>
+</table>
+</p>

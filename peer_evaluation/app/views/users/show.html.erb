@@ -1,0 +1,24 @@
+<% provide(:title, @user.name) %>
+<h1><%= @user.name %></h1>
+<h3>Pending Evaluations to Write:</h3>
+  <% Eval.where(writerID:@user.id).to_a.each do|r| %>
+    <% if r.comments==nil %>
+      <%= link_to "Evaluate "+User.find(r.recieverID).name+" in "+Project.find(r.projectID).name, writeevaluation_path(:ID => r.id) %><br>
+
+    <% end %>
+  <% end %>
+    
+<hr/>
+<p>
+  <strong>Evaluations about you:</strong><br>
+  <ul>
+  <% Eval.where(recieverID:@user.id).to_a.each do |e| %>
+      
+      <% if e.comments!=nil %><li>
+      <strong><%= Project.find(e.projectID).name %> </strong><%=": "%><%= e.score %> - <%= e.comments %>
+      </li>
+  <% end %>
+  <% end %>
+  </ul>
+
+</p>

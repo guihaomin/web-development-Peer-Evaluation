@@ -1,0 +1,71 @@
+<% instructor=User.find(params[:instructor]) %>
+<% provide(:title, instructor.name) %>
+
+<% if current_user.user_type != 'instructor' %>
+    <% controller.redirect_to root_url %>
+<% end %>
+<h1>Instructor Page</h1>
+<% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
+<h3>Management:</h3>
+<ul>
+  <li><%= link_to "Manage Groups", manage_groups_path %></li>
+  <li><%= link_to "Manage Projects", manage_projects_path %></li>
+</ul>
+<body>
+<h3>Student Evaluations Recieved:</h3>
+<% types=[] %>
+<% Group.all.to_a.each do |g| %>
+    <% if !(types.include? g.group_type) %>
+        <% types.push(g.group_type) %>
+        <% end %>
+<% end %>
+<div>
+<ul>
+  <% types.each do |t| %>
+      <li><%= t %></li>
+      <ul >
+        <% Project.where(project_type: t).to_a.each do |p| %>
+            <li><%= p.name %></li>
+            <% groupList=[] %>
+            <% Eval.where(projectID: p.id).to_a.each do |e| %>
+                <% if !(groupList.include? e.groupID) %>
+                    <% groupList.push(e.groupID) %>
+                <% end %>
+            <% end %>
+            <ul>
+              <% groupList.each do |g| %>
+                  <li><%= Group.find(g).name %></li>
+                  <ul>
+                    <% recievers=[] %>
+                    <% Eval.where(projectID: p.id, groupID: g).to_a.each do |r| %>
+                        <% if !(recievers.include? r.recieverID) %>
+                            <% recievers.push(r.recieverID) %>
+                        <% end %>
+                    <% end %>
+                    <% recievers.each do |person| %>
+                        <li><%= User.find(person).name %></li>
+                        <ul>
+                          <% Eval.where(projectID: p, recieverID: person).to_a.each do |record| %>
+                              <% if record.comments!=nil %>
+                                  <li>
+                                    <%= User.find(record.writerID).name %> : <%= record.score %>
+                                    - <%= record.comments %>
+                                  </li>
+                              <% end %>
+                          <% end %>
+                        </ul>
+                    <% end %>
+                  </ul>
+              <% end %>
+
+
+            </ul>
+        <% end %>
+      </ul>
+  <% end %>
+</ul>
+</div>
+
+</body>

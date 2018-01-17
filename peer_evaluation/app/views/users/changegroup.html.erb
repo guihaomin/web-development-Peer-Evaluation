@@ -1,0 +1,22 @@
+<% provide(:title, 'Change Group') %>
+<h1>Change Group</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_tag '/completechange' do |f| %>
+        <div class="form_item">
+	  <% all_group=[] %>
+	  <% Group.all.to_a.each do|g| %>
+	  <% if !all_group.include? g.name %>
+	  <% all_group.push(g.name) %>
+	  <% end %>
+	  <% end %>
+	  <%= select_tag :name, options_for_select(all_group),
+                       :prompt => '--- Select a Group ---',
+                       :required => true %><br/><br/>
+        </div>
+
+        <%= submit_tag "Join Group", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
